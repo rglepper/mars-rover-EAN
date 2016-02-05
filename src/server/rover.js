@@ -1,9 +1,7 @@
 var newRover = function(x, y, facing) {
     return {
-        position: {
-            x: parseInt(x, 10),
-            y: parseInt(y, 10)
-        },
+        x: parseInt(x, 10),
+        y: parseInt(y, 10),
         facing: facing
     };
 };
@@ -14,9 +12,9 @@ var calulateMovement = function(facing) {
 
 var move = function(rover, movement) {
     if ('N' === rover.facing || 'S' === rover.facing) {
-        return newRover(rover.position.x, rover.position.y + movement, rover.facing);
+        return newRover(rover.x, rover.y + movement, rover.facing);
     } else {
-        return newRover(rover.position.x + movement, rover.position.y, rover.facing);
+        return newRover(rover.x + movement, rover.y, rover.facing);
     }
 };
 
@@ -33,13 +31,13 @@ var rotate = function(facing, change) {
 
 var rotateRigth = function(rover) {
     var facing = rotate(rover.facing, 1);
-    return newRover(rover.position.x, rover.position.y, facing);
+    return newRover(rover.x, rover.y, facing);
 };
 
 var rotateLeft = function(rover) {
     var facing = rotate(rover.facing, -1);
 
-    return newRover(rover.position.x, rover.position.y, facing);
+    return newRover(rover.x, rover.y, facing);
 };
 
 var supportedActions = {

@@ -17,14 +17,14 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{{vm.rover.position.x}}</td>
-                                        <td>{{vm.rover.position.y}}</td>
+                                        <td>{{vm.rover.x}}</td>
+                                        <td>{{vm.rover.y}}</td>
                                         <td>{{vm.rover.facing}}</td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <div ng-if="vm.rover.position.x && vm.rover.position.y">
-                                <mr-canvas x="vm.rover.position.x" y="vm.rover.position.y" facing="vm.rover.facing"></mr-canvas>
+                            <div ng-if="vm.rover.x && vm.rover.y">
+                                <mr-canvas x="vm.rover.x" y="vm.rover.y" facing="vm.rover.facing"></mr-canvas>
                             </div>
 
                         </div>
@@ -41,11 +41,11 @@
                             <form>
                                 <div class="form-group">
                                     <label for="initialx">Initial X position</label>
-                                    <div><input type="text" class="form-control" id="initialx" placeholder="1" ng-model="vm.initial.x"></div>
+                                    <div><input type="text" class="form-control" id="initialx" ng-model="vm.initial.x"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="initialy">Initial Y position</label>
-                                    <div><input type="text" class="form-control" id="initialy" placeholder="3" ng-model="vm.initial.y"></div>
+                                    <div><input type="text" class="form-control" id="initialy" ng-model="vm.initial.y"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="initialFacing">Where the rover is initially facing</label>
@@ -55,7 +55,7 @@
                                     <label for="instructions">Instructions to move the rover</label>
                                     <div><input type="text" class="form-control" id="instructions" ng-model="vm.instructions"></div>
                                 </div>
-                                <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.initial, vm.instructions)">Submit</button>
+                                <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.initial, vm.instructions)">Move rover</button>
                             </form>
 
                         </div>
