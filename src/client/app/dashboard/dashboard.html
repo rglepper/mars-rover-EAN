@@ -1,0 +1,70 @@
+<section id="dashboard-view">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget wblue">
+                        <div ht-widget-header title="Rover position"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>X</th>
+                                        <th>Y</th>
+                                        <th>Facing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{vm.rover.position.x}}</td>
+                                        <td>{{vm.rover.position.y}}</td>
+                                        <td>{{vm.rover.facing}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-if="vm.rover.position.x && vm.rover.position.y">
+                                <mr-canvas x="vm.rover.position.x" y="vm.rover.position.y" facing="vm.rover.facing"></mr-canvas>
+                            </div>
+
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget wblue">
+                        <div ht-widget-header title="Instructions"
+                             allow-collapse="true"></div>
+                        <div class="widget-content">
+                            <form>
+                                <div class="form-group">
+                                    <label for="initialx">Initial X position</label>
+                                    <div><input type="text" class="form-control" id="initialx" placeholder="1" ng-model="vm.initial.x"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="initialy">Initial Y position</label>
+                                    <div><input type="text" class="form-control" id="initialy" placeholder="3" ng-model="vm.initial.y"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="initialFacing">Where the rover is initially facing</label>
+                                    <div><input type="text" class="form-control" id="initialFacing" ng-model="vm.initial.facing"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="instructions">Instructions to move the rover</label>
+                                    <div><input type="text" class="form-control" id="instructions" ng-model="vm.instructions"></div>
+                                </div>
+                                <button type="submit" class="btn btn-default" ng-click="vm.submit(vm.initial, vm.instructions)">Submit</button>
+                            </form>
+
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
