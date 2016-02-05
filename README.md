@@ -1,6 +1,6 @@
 # Mars rover app 
 
-Small Express/Angular/Node app that controls a mars rover in a server from a browser through an API and paints the result on a grid in screen
+Small Express/Angular/Node app that controls a mars rover in a server from a browser through an API and paints the result on a grid
 
 ### Based on  the mars rover problem
 
@@ -51,9 +51,10 @@ Expected Output:
 - Instructions are uppercase
 - There's no default rover
 - Left is west 
+- Node version 4.2.3 
 
 
-The application moves 1 rover and the resulting position from the API updates the form and clears the instructions so only instructions are required on a second interaction with the rover. New positions will overwrite. 
+The application moves 1 rover and the resulting position from the API updates the form and clears the old instructions so only instructions are required on a second interaction with the rover. New positions will overwrite. 
 
 
 
@@ -79,6 +80,7 @@ The application moves 1 rover and the resulting position from the API updates th
     ```
 
     >Refer to these [instructions on how to not require sudo](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
+    
 
 ## Running HotTowel
 
