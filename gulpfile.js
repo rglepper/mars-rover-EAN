@@ -46,16 +46,6 @@ gulp.task('vet', function() {
 });
 
 /**
- * Create a visualizer report
- */
-gulp.task('plato', function(done) {
-    log('Analyzing source with Plato');
-    log('Browse to /report/plato/index.html to see Plato results');
-
-    startPlatoVisualizer(done);
-});
-
-/**
  * Compile less to css
  * @return {Stream}
  */
@@ -209,7 +199,7 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function() {
  * and inject them into the new index.html
  * @return {Stream}
  */
-gulp.task('optimize', ['inject', 'test'], function() {
+gulp.task('optimize', ['inject'], function() {
     log('Optimizing the js, css, and html');
 
     var assets = $.useref.assets({searchPath: './'});
@@ -298,26 +288,6 @@ gulp.task('clean-code', function(done) {
         config.build + '**/*.html'
     );
     clean(files, done);
-});
-
-/**
- * Run specs once and exit
- * To start servers and run midway specs as well:
- *    gulp test --startServers
- * @return {Stream}
- */
-gulp.task('test', ['vet', 'templatecache'], function(done) {
-    startTests(true /*singleRun*/ , done);
-});
-
-/**
- * Run specs and wait.
- * Watch for file changes and re-run tests on each change
- * To start servers and run midway specs as well:
- *    gulp autotest --startServers
- */
-gulp.task('autotest', function(done) {
-    startTests(false /*singleRun*/ , done);
 });
 
 /**
@@ -526,80 +496,6 @@ function startBrowserSync(isDev, specRunner) {
     }
 
     browserSync(options);
-}
-
-/**
- * Start Plato inspector and visualizer
- */
-function startPlatoVisualizer(done) {
-    log('Running Plato');
-
-    var files = glob.sync(config.plato.js);
-    var excludeFiles = /.*\.spec\.js/;
-    var plato = require('plato');
-
-    var options = {
-        title: 'Plato Inspections Report',
-        exclude: excludeFiles
-    };
-    var outputDir = config.report + '/plato';
-
-    plato.inspect(files, outputDir, options, platoCompleted);
-
-    function platoCompleted(report) {
-        var overview = plato.getOverviewReport(report);
-        if (args.verbose) {
-            log(overview.summary);
-        }
-        if (done) { done(); }
-    }
-}
-
-/**
- * Start the tests using karma.
- * @param  {boolean} singleRun - True means run once and end (CI), or keep running (dev)
- * @param  {Function} done - Callback to fire when karma is done
- * @return {undefined}
- */
-function startTests(singleRun, done) {
-    var child;
-    var excludeFiles = [];
-    var fork = require('child_process').fork;
-    var karma = require('karma').server;
-    var serverSpecs = config.serverIntegrationSpecs;
-
-    if (args.startServers) {
-        log('Starting servers');
-        var savedEnv = process.env;
-        savedEnv.NODE_ENV = 'dev';
-        savedEnv.PORT = 8888;
-        child = fork(config.nodeServer);
-    } else {
-        if (serverSpecs && serverSpecs.length) {
-            excludeFiles = serverSpecs;
-        }
-    }
-
-    karma.start({
-        configFile: __dirname + '/karma.conf.js',
-        exclude: excludeFiles,
-        singleRun: !!singleRun
-    }, karmaCompleted);
-
-    ////////////////
-
-    function karmaCompleted(karmaResult) {
-        log('Karma completed');
-        if (child) {
-            log('shutting down the child process');
-            child.kill();
-        }
-        if (karmaResult === 1) {
-            done('karma: tests failed with code ' + karmaResult);
-        } else {
-            done();
-        }
-    }
 }
 
 /**
