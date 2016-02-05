@@ -9,8 +9,8 @@
     /* @ngInject */
     function DashboardController($q, dataservice, logger) {
         var vm = this;
-        vm.rover = [];
-        vm.title = 'Dashboard';
+        vm.rover = {};
+        vm.title = 'Mars rover controller through API';
         vm.initial = {};
         vm.instructions = '';
         vm.submit = submit;
@@ -18,6 +18,8 @@
         function moveRover(obj) {
             return dataservice.moveRover(obj).then(function(data) {
                 vm.rover = data;
+                vm.initial = vm.rover;
+                vm.instructions = '';
                 return vm.rover;
             });
         }
