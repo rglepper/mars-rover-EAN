@@ -1,6 +1,64 @@
-# mars-rover
+# Mars rover app 
 
-**Generated from HotTowel Angular**
+Small Express/Angular/Node app that controls a mars rover in a server from a browser through an API and paints the result on a grid in screen
+
+### Based on  the mars rover problem
+
+```
+A squad of robotic rovers are to be landed by NASA on a plateau on Mars.
+
+This plateau, which is curiously rectangular, must be navigated by the rovers so that their on board cameras can get a complete view of the surrounding terrain to send back to Earth.
+
+A rover's position is represented by a combination of an x and y co-ordinates and a letter representing one of the four cardinal compass points (N, S, E or W) . The plateau is divided up into a grid to simplify navigation. An example position might be 0, 0, N, which means the rover is in the bottom left corner and facing North.
+
+In order to control a rover, NASA sends a simple string of letters. The possible letters are 'L', 'R' and 'M'. 'L' and 'R' makes the rover spin 90 degrees left or right respectively, without moving from its current spot.
+
+'M' means move forward one grid point, and maintain the same heading.
+
+Assume that the square directly North from (x, y) is (x, y+1).
+
+Input:
+
+The first line of input is the upper-right coordinates of the plateau, the lower-left coordinates are assumed to be 0,0.
+
+The rest of the input is information pertaining to the rovers that have been deployed. Each rover has two lines of input. The first line gives the rover's position, and the second line is a series of instructions telling the rover how to explore the plateau.
+
+The position is made up of two integers and a letter separated by spaces, corresponding to the x and y co-ordinates and the rover's orientation.
+
+Each rover will be finished sequentially, which means that the second rover won't start to move until the first one has finished moving.
+
+Output:
+
+The output for each rover should be its final co-ordinates and heading.
+
+Test Input:
+
+5 5
+1 2 N
+LMLMLMLMM
+
+Instructions 2: 
+3 3 E
+MMRMMRMRRM
+
+Expected Output:
+
+1 3 N
+5 1 E
+```
+### Assumptions
+- The plateau is 5*5
+- Instructions are uppercase
+- There's no default rover
+- Left is west 
+
+
+The application moves 1 rover and the resulting position from the API updates the form and clears the instructions so only instructions are required on a second interaction with the rover. New positions will overwrite. 
+
+
+
+
+**Originally generated from HotTowel Angular** Use the following instructions to run th app
 
 >*Opinionated Angular style guide for teams by [@john_papa](//twitter.com/john_papa)*
 
@@ -27,9 +85,6 @@
 ### Linting
  - Run code analysis using `gulp vet`. This runs jshint, jscs, and plato.
 
-### Tests
- - Run the unit tests using `gulp test` (via karma, mocha, sinon).
-
 ### Running in dev mode
  - Run the project with `gulp serve-dev`
 
@@ -42,69 +97,12 @@
 ### Running the optimized code
  - Run the optimize project from the build folder with `gulp serve-build`
 
-## Exploring HotTowel
-HotTowel Angular starter project
-
-### Structure
-The structure also contains a gulpfile.js and a server folder. The server is there just so we can serve the app using node. Feel free to use any server you wish.
-
-	/src
-		/client
-			/app
-			/content
-
 ### Installing Packages
 When you generate the project it should run these commands, but if you notice missing packages, run these again:
 
  - `npm install`
  - `bower install`
 
-### The Modules
-The app has 4 feature modules and depends on a series of external modules and custom but cross-app modules
-
-```
-app --> [
-        app.admin --> [
-            app.core,
-            app.widgets
-        ],
-        app.dashboard --> [
-            app.core,
-            app.widgets
-        ],
-        app.layout --> [
-            app.core
-        ],
-        app.widgets,
-		app.core --> [
-			ngAnimate,
-			ngSanitize,
-			ui.router,
-			blocks.exception,
-			blocks.logger,
-			blocks.router
-		]
-    ]
-```
-
-#### core Module
-Core modules are ones that are shared throughout the entire application and may be customized for the specific application. Example might be common data services.
-
-This is an aggregator of modules that the application will need. The `core` module takes the blocks, common, and Angular sub-modules as dependencies.
-
-#### blocks Modules
-Block modules are reusable blocks of code that can be used across projects simply by including them as dependencies.
-
-##### blocks.logger Module
-The `blocks.logger` module handles logging across the Angular app.
-
-##### blocks.exception Module
-The `blocks.exception` module handles exceptions across the Angular app.
-
-It depends on the `blocks.logger` module, because the implementation logs the exceptions.
-
-##### blocks.router Module
-The `blocks.router` module contains a routing helper module that assists in adding routes to the $routeProvider.
 
 ## Gulp Tasks
 
@@ -124,69 +122,6 @@ The `blocks.router` module contains a routing helper module that assists in addi
 
     Displays all files affected and extended information about the code analysis.
 
-- `gulp plato`
-
-    Performs code analysis using plato on all javascript files. Plato generates a report in the reports folder.
-
-### Testing
-
-- `gulp serve-specs`
-
-    Serves and browses to the spec runner html page and runs the unit tests in it. Injects any changes on the fly and re runs the tests. Quick and easy view of tests as an alternative to terminal via `gulp test`.
-
-- `gulp test`
-
-    Runs all unit tests using karma runner, mocha, chai and sinon with phantomjs. Depends on vet task, for code analysis.
-
-- `gulp test --startServers`
-
-    Runs all unit tests and midway tests. Cranks up a second node process to run a server for the midway tests to hit a web api.
-
-- `gulp autotest`
-
-    Runs a watch to run all unit tests.
-
-- `gulp autotest --startServers`
-
-    Runs a watch to run all unit tests and midway tests. Cranks up a second node process to run a server for the midway tests to hit a web api.
-
-### Cleaning Up
-
-- `gulp clean`
-
-    Remove all files from the build and temp folders
-
-- `gulp clean-images`
-
-    Remove all images from the build folder
-
-- `gulp clean-code`
-
-    Remove all javascript and html from the build folder
-
-- `gulp clean-fonts`
-
-    Remove all fonts from the build folder
-
-- `gulp clean-styles`
-
-    Remove all styles from the build folder
-
-### Fonts and Images
-
-- `gulp fonts`
-
-    Copy all fonts from source to the build folder
-
-- `gulp images`
-
-    Copy all images from source to the build folder
-
-### Styles
-
-- `gulp styles`
-
-    Compile less files to CSS, add vendor prefixes, and copy to the build folder
 
 ### Bower Files
 
